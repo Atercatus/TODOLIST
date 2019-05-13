@@ -1,9 +1,9 @@
 import express from "express";
 import routes from "../routes";
-import { showTodolist } from "../controllers/todolistController";
+import { getTodolist } from "../controllers/todolistControllers";
 
 const todolistRouter = express.Router();
 
-todolistRouter.get("/", showTodolist);
+todolistRouter.get(routes.todolistDetail(), getTodolist);
 
 export default todolistRouter;

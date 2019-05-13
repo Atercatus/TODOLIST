@@ -1,4 +1,10 @@
 extends layouts/main
 
 block content
-    p todolist detail
+    .container
+        if errmsg
+            .form__errmsg=errmsg
+        .todolist-container
+            .todolist__list
+            input(type="text", name="newdo", placeholder="New task...").todolist__newdo
+                   

@@ -16,3 +16,8 @@ main {
   margin: 0 auto;
   min-height: 70vh;
 }
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
