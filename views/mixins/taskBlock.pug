@@ -1,0 +1,12 @@
+mixin taskBlock(task = {})
+    .task-container#jsTaskContainer
+        div(id=task.id).task__id
+        .task__description#jsTaskDescription #{task.description}
+        a.task__title#jsTaskTitle=task.taskTitle
+        a.task__priority#jsTaskPriority=task.priority
+        a.task__startDate#jsTaskStartDate=task.startDate
+        a.task__tilde ~
+        a.task__deadline#jsTaskDeadline=task.deadline
+        i.far.fa-check-circle#jsTaskStatus
+        i.task__modifyBtn.far.fa-edit#jsModifyIcon
+        i.task__deleteBtn.far.fa-trash-alt#jsDeleteIcon

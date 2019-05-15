@@ -1,10 +1,10 @@
 extends layouts/main
-include mixins/todoBlock
+include mixins/listBlock
 
 block content
         .list-container
-            each todo in todolists
-                +todoBlock({
-                    id: todo.id,
-                    title: todo.listTitle
+            each list in todolists
+                +listBlock({
+                    id: list.id,
+                    title: list.listTitle
                 })

@@ -1,10 +1,13 @@
 extends layouts/main
+include mixins/todolistForm
+include mixins/taskBlock
 
 block content
-    .container
+    .container#jsTaskContainer
         if errmsg
             .form__errmsg=errmsg
-        .todolist-container
-            .todolist__list
-            input(type="text", name="newdo", placeholder="New task...").todolist__newdo
-                   
+        button.popup-button#jsPopupBtn Add Task
+        +todolistForm({})
+        if todos
+            each task in todos.tasks
+                +taskBlock(task)

@@ -1,4 +1,5 @@
 .header {
+  user-select: none;
   background-color: $header-background-color;
   margin-bottom: 50px;
   .header__wrapper {

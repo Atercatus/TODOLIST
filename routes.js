@@ -1,15 +1,18 @@
 // GLOBAL
 const HOME = "/";
-const NEWLIST = "/newlist";
-const SHOWLIST = "/showlist";
+const NEW_LIST = "/newlist";
+const SHOW_LIST = "/showlist";
 
 // TODOLIST
 const TODOLIST = "/todolist";
 const TODOLIST_DETAIL = "/:id";
+const ADD_TASK = "/:id/addtask";
+const MODIFY_TASK = "/task/:id/patch";
+const DELETE_TASK = "/task/:id/delete";
 
 const routes = {
   home: HOME,
-  showlist: SHOWLIST,
+  showList: SHOW_LIST,
   todolist: TODOLIST,
   todolistDetail: id => {
     if (id) {
@@ -18,7 +21,28 @@ const routes = {
       return TODOLIST_DETAIL;
     }
   },
-  newlist: NEWLIST
+  newList: NEW_LIST,
+  addTask: id => {
+    if (id) {
+      return `${id}/addtask`;
+    } else {
+      return ADD_TASK;
+    }
+  },
+  patchTask: taskId => {
+    if (taskId) {
+      return `/task/${taskId}/patch`;
+    } else {
+      return MODIFY_TASK;
+    }
+  },
+  deleteTask: taskId => {
+    if (taskId) {
+      return `/task/${taskId}/delete`;
+    } else {
+      return DELETE_TASK;
+    }
+  }
 };
 
 export default routes;

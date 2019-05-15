@@ -1,0 +1,19 @@
+mixin todolistForm({})
+    .todolist-container#jsPopup
+        .todolist-form#jsFormTaskId
+            .todolist__top
+                input(type="text", name="title", placeholder="Title", autocomplete="off", required=true).todolist__title#jsFormTitle
+                span.statusIcon
+                    i.far.fa-check-circle
+            .todolist__middle
+                textarea(name="description", placeholder="Description", required=true)#jsFormDescription
+            .todolist__bottom
+                select(name="priority", required=true)#jsFormPriority
+                    option(value="1") Low
+                    option(value="2") Middle
+                    option(value="3") High
+                input(type="date", name="startDate", required=true)#jsStartDate
+                input(type="date", name="deadline", required=true)#jsDeadline
+            .todolist__buttons
+                input(type="button", value="Submit")#jsSubmitBtn
+                input(type="button", value="Cancel")#jsCloseBtn

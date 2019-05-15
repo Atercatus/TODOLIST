@@ -7,9 +7,9 @@ const globalRouter = express.Router();
 
 globalRouter.get(routes.home, home);
 
-globalRouter.get(routes.showlist, showlist);
+globalRouter.get(routes.showList, showlist);
 
-globalRouter.get(routes.newlist, getNewList);
-globalRouter.post(routes.newlist, postNewList);
+globalRouter.get(routes.newList, getNewList);
+globalRouter.post(routes.newList, postNewList);
 
 export default globalRouter;

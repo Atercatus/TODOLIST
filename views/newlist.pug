@@ -4,6 +4,6 @@ block content
     .form-container
         if errmsg
             .form__errmsg=errmsg
-        form(action=`${routes.newlist}`, method="post")
+        form(action=`${routes.newList}`, method="post")
             input(type="text", name="title", placeholder="Title", required=true)
             input(type="submit", value="Add Now")
