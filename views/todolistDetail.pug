@@ -6,9 +6,13 @@ block content
     .container#jsTaskContainer
         if errmsg
             .form__errmsg=errmsg
+        div.todolist__options
+            input.todolist__title#jsListTitle(type="text", name="title", placeholder="Title", required=true, maxlength="30", value=`${list.listTitle}`, autocomplete="off",  readonly)
+            i.far.fa-save#jsListSave
+            i.far.fa-trash-alt#jsListDelete
         div.todolist__controls
-            i.far.fa-bell.todolist__alert#jsAlert
             button.popup-button#jsPopupBtn Add Task
+            i.far.fa-bell.todolist__alert#jsAlert
         .todolist__header
             span.todolist__header__title Title
             span.todolist__header__priority Priority

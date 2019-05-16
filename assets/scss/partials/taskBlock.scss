@@ -58,7 +58,7 @@ $font-color: white;
 .task-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: $list-detail-width;
   height: 30px;
   margin-top: 20px;
   display: flex;

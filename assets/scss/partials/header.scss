@@ -3,9 +3,9 @@
   background-color: $header-background-color;
   margin-bottom: 50px;
   .header__wrapper {
-    padding: 5px 0px;
+    padding: 10px 5px;
     width: 100%;
-    margin: 0 auto;
+    margin: 0px auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
@@ -38,7 +38,7 @@
         justify-self: center;
         font-weight: 600;
         color: white;
-        font-size: 25px;
+        font-size: 27px;
         text-shadow: 1px 1px #4b4b4b;
       }
     }

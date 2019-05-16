@@ -1,8 +1,39 @@
+@import "../config/variables.scss";
+
 .container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .todolist__options {
+    position: relative;
+    width: $list-detail-width;
+    border: 1px solid #dfe6e9;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 15px;
+
+    .todolist__title {
+      width: 100%;
+      background: transparent;
+      font-size: 30px;
+      text-align: center;
+      margin-left: 50px;
+      padding: 7px 0px;
+      color: #81ecec;
+    }
+    i {
+      color: #dfe6e9;
+      justify-self: flex-end;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    &:hover {
+      border: 1px solid #d63031;
+    }
+  }
 
   .todolist__controls {
     display: flex;
@@ -17,12 +48,13 @@
       font-weight: 100;
       border-radius: 3px;
       margin-bottom: 30px;
+      margin-right: 30px;
     }
 
     .todolist__alert {
       cursor: pointer;
       text-align: center;
-      color: blue;
+      color: #81ecec;
       width: auto;
       font-size: 30px;
       padding: 2px 7px;
@@ -47,7 +79,7 @@
 
   .todolist__header {
     width: 100%;
-    max-width: 600px;
+    max-width: $list-detail-width;
     height: 25px;
     display: flex;
     border-bottom: 2px solid #55efc4;

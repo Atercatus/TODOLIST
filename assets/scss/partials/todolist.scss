@@ -42,7 +42,7 @@ $focus-border-color: #ea2027;
 }
 
 .todolist-container {
-  width: 600px;
+  width: $list-detail-width;
   height: 300px;
   display: flex;
   flex-direction: column;

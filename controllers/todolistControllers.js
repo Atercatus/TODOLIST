@@ -44,11 +44,13 @@ export const getTodolist = async (req, res) => {
     // get id from params
 
     // find by id
+    const list = await Todolist.findById(id);
     const todolist = await Todolist.findById(id).populate("tasks");
 
     res.render("todolistDetail.pug", {
       pageTitle: "TODOLIST DETAIL",
       todos: todolist,
+      list: list,
       id: id
     });
   } catch (err) {
@@ -60,6 +62,39 @@ export const getTodolist = async (req, res) => {
   }
 };
 
+export const deleteList = async (req, res) => {
+  try {
+    const {
+      params: { id }
+    } = req;
+
+    await Todolist.findByIdAndDelete(id);
+    res.status(200).end();
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({ message: err.message });
+    res.end();
+  }
+};
+
+export const modifyListTitle = async (req, res) => {
+  try {
+    const {
+      params: { id },
+      body: { title }
+    } = req;
+
+    await Todolist.findByIdAndUpdate(id, { $set: { listTitle: title } });
+    res.write(JSON.stringify(title));
+    res.status(200).end();
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({ message: err.message });
+    res.end();
+  }
+};
+
+// task
 export const patchTask = async (req, res) => {
   let {
     params: { id },
@@ -86,8 +121,6 @@ export const patchTask = async (req, res) => {
       deadline: deadline,
       status: status
     };
-
-    console.log(task);
 
     await Task.findByIdAndUpdate(id, task);
     task.id = id;

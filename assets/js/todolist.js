@@ -3,6 +3,9 @@ import routes from "../../routes";
 
 // todolist detail
 const popupBtn = document.getElementById("jsPopupBtn");
+const listTitle = document.getElementById("jsListTitle");
+const listTitleSaveBtn = document.getElementById("jsListSave");
+const listDeleteBtn = document.getElementById("jsListDelete");
 
 // task block
 const container = document.getElementById("jsTaskContainer");
@@ -20,7 +23,9 @@ const taskBlockDeadline = document.getElementById("jsDeadline");
 const closeBtn = document.getElementById("jsCloseBtn");
 const submitBtn = document.getElementById("jsSubmitBtn");
 
-///////////////////////// utils
+///////////////////////////////////////////////////
+// UTILS
+///////////////////////////////////////////////////
 const getDateFormat = date => {
   const year = date.getFullYear();
   let month = new String(date.getMonth() + 1);
@@ -40,6 +45,101 @@ const getDateSubtract = (start, end) => {
   const subs = end - start;
 
   return subs;
+};
+
+///////////////////////////////////////////////////
+// TODOLIST CRUD
+///////////////////////////////////////////////////
+const deleteList = async () => {
+  const todolistId = window.location.href.split("/todolist/")[1];
+  await axios({
+    url: `/todolist/${routes.deleteList(todolistId)}`,
+    method: "DELETE"
+  })
+    .then(response => {
+      console.log(response);
+      window.location.replace(routes.home);
+    })
+    .catch(err => {
+      console.log(err);
+      window.alert(err);
+    });
+};
+
+const modifyListTitle = async () => {
+  const todolistId = window.location.href.split("/todolist/")[1];
+
+  console.log(listTitle.value);
+  await axios({
+    url: `/todolist${routes.modifyListTitle(todolistId)}`,
+    method: "PATCH",
+    data: {
+      title: listTitle.value
+    }
+  })
+    .then(response => {
+      console.log(response);
+      setListTitle(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+      window.alert(err);
+    });
+};
+
+const setListTitle = title => {
+  listTitle.value = title;
+};
+
+///////////////////////////////////////////////////
+// TODOLIST DETAIL EVENT
+///////////////////////////////////////////////////
+const focusListTitle = () => {
+  listTitle.readOnly = false;
+  console.log("focus");
+};
+const focusoutListTitle = () => {
+  listTitle.readOnly = true;
+  console.log("focusout");
+};
+
+///////////////////////////////////////////////////
+// TODOLIST FORM EVENT
+///////////////////////////////////////////////////
+// 추가 및 수정 시 사용되는 폼을 popup한다
+const popup = task => {
+  // 수정
+  if (task) {
+    taskId.id = task.id;
+    taskBlockTitle.value = task.taskTitle;
+    taskBlockDescription.value = task.description;
+    taskBlockPriority.value = task.priority;
+    taskBlockStartDate.value = task.startDate;
+    taskBlockDeadline.value = task.deadline;
+    taskBlockStatus.dataset.status = task.status;
+  }
+  // 추가
+  else {
+    const date = new Date();
+    const dateFormat = getDateFormat(date);
+
+    taskBlockStartDate.value = dateFormat;
+    taskBlockDeadline.value = dateFormat;
+    taskBlockTitle.value = "";
+    taskBlockDescription.value = "";
+    taskBlockPriority.value = 1;
+    taskBlockStatus.dataset.status = 0;
+  }
+
+  setFormStatusStyle(taskBlockStatus);
+  todoForm.classList.remove("unpop");
+  todoForm.classList.add("popup");
+};
+
+const unpop = () => {
+  todoForm.classList.remove("popup");
+  todoForm.classList.add("unpop");
+  taskId.id = "";
 };
 
 // 경고 표시 스타일 변경
@@ -488,42 +588,6 @@ const deleteTaskRow = id => {
   row.parentNode.removeChild(row);
 };
 
-// 추가 및 수정 시 사용되는 폼을 popup한다
-const popup = task => {
-  // 수정
-  if (task) {
-    taskId.id = task.id;
-    taskBlockTitle.value = task.taskTitle;
-    taskBlockDescription.value = task.description;
-    taskBlockPriority.value = task.priority;
-    taskBlockStartDate.value = task.startDate;
-    taskBlockDeadline.value = task.deadline;
-    taskBlockStatus.dataset.status = task.status;
-  }
-  // 추가
-  else {
-    const date = new Date();
-    const dateFormat = getDateFormat(date);
-
-    taskBlockStartDate.value = dateFormat;
-    taskBlockDeadline.value = dateFormat;
-    taskBlockTitle.value = "";
-    taskBlockDescription.value = "";
-    taskBlockPriority.value = 1;
-    taskBlockStatus.dataset.status = 0;
-  }
-
-  setFormStatusStyle(taskBlockStatus);
-  todoForm.classList.remove("unpop");
-  todoForm.classList.add("popup");
-};
-
-const unpop = () => {
-  todoForm.classList.remove("popup");
-  todoForm.classList.add("unpop");
-  taskId.id = "";
-};
-
 // 수정과 추가의 폼을 재활용하기 위해
 // submit button 의 클릭 이벤트를 변경한다.
 const handlePopBtn = () => {
@@ -581,7 +645,6 @@ const init = () => {
   tasks.forEach(task => {
     task.addEventListener("animationend", handleAlertEnd);
   });
-
   popupBtn.addEventListener("click", handlePopBtn);
   closeBtn.addEventListener("click", handleCloseBtn);
   submitBtn.addEventListener("click", handleSubmitBtn);
@@ -591,9 +654,16 @@ const init = () => {
       alertTask(task.parentNode);
     });
   });
+
+  listTitleSaveBtn.addEventListener("click", modifyListTitle);
+  listDeleteBtn.addEventListener("click", deleteList);
+
+  listTitle.addEventListener("click", focusListTitle);
+  listTitle.addEventListener("focusout", focusoutListTitle);
+
   setTasksStyle();
 };
 
-if (todoForm) {
+if (container) {
   init();
 }

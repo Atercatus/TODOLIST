@@ -5,12 +5,16 @@ import {
   postNewTask,
   patchTask,
   deleteTask,
-  patchTaskStatus
+  patchTaskStatus,
+  deleteList,
+  modifyListTitle
 } from "../controllers/todolistControllers";
 
 const todolistRouter = express.Router();
 
 todolistRouter.get(routes.todolistDetail(), getTodolist);
+todolistRouter.delete(routes.deleteList(), deleteList);
+todolistRouter.patch(routes.modifyListTitle(), modifyListTitle);
 
 todolistRouter.post(routes.addTask(), postNewTask);
 todolistRouter.patch(routes.patchTask(), patchTask);
