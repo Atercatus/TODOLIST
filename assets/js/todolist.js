@@ -6,6 +6,7 @@ const popupBtn = document.getElementById("jsPopupBtn");
 
 // task block
 const container = document.getElementById("jsTaskContainer");
+const bell = document.getElementById("jsAlert");
 
 // todolist form
 const taskId = document.getElementById("jsFormTaskId");
@@ -19,6 +20,7 @@ const taskBlockDeadline = document.getElementById("jsDeadline");
 const closeBtn = document.getElementById("jsCloseBtn");
 const submitBtn = document.getElementById("jsSubmitBtn");
 
+///////////////////////// utils
 const getDateFormat = date => {
   const year = date.getFullYear();
   let month = new String(date.getMonth() + 1);
@@ -53,6 +55,7 @@ const setCautionStyle = caution => {
 
   if (getDateSubtract(s_date, e_date) < 0 && status.dataset.status !== "2") {
     caution.classList.add("fa-exclamation-triangle");
+    if (status.dataset.status === "0") alertTask(caution.parentNode);
   }
 };
 
@@ -160,7 +163,8 @@ const setStatusStyle = status => {
     parent.querySelector("#jsTaskTitle").classList.add("task__title-completed");
     parent
       .querySelector("#jsTaskCaution")
-      .classList.remove(".fa-exclamation-triangle");
+      .classList.remove("fa-exclamation-triangle");
+
     status.classList.add("fa-check-circle");
   }
 };
@@ -344,6 +348,7 @@ const postNewTask = async task => {
 const addTaskRow = task => {
   const div = document.createElement("div");
   div.classList.add("task-container");
+  div.addEventListener("animationend", handleAlertEnd);
   div.id = "jsTaskContainer";
 
   const div_taskId = document.createElement("div");
@@ -533,6 +538,14 @@ const handleCloseBtn = () => {
   unpop();
 };
 
+const handleAlertEnd = e => {
+  e.target.classList.remove("shake");
+};
+
+const alertTask = task => {
+  task.classList.add("shake");
+};
+
 // Task들의 현재 상태를 style에 반영
 const setTasksStyle = () => {
   const modifyIcons = document.querySelectorAll("#jsModifyIcon");
@@ -564,9 +577,20 @@ const setTasksStyle = () => {
 };
 
 const init = () => {
+  const tasks = document.querySelectorAll("#jsTaskContainer");
+  tasks.forEach(task => {
+    task.addEventListener("animationend", handleAlertEnd);
+  });
+
   popupBtn.addEventListener("click", handlePopBtn);
   closeBtn.addEventListener("click", handleCloseBtn);
   submitBtn.addEventListener("click", handleSubmitBtn);
+  bell.addEventListener("click", () => {
+    const overTasks = container.querySelectorAll(".fa-exclamation-triangle");
+    overTasks.forEach(task => {
+      alertTask(task.parentNode);
+    });
+  });
   setTasksStyle();
 };
 
