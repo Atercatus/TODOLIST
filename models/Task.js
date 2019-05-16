@@ -6,8 +6,7 @@ const TaskSchema = new mongoose.Schema({
     required: "Title is required"
   },
   description: {
-    type: String,
-    required: "Description is required"
+    type: String
   },
   startDate: {
     type: String,
@@ -16,13 +15,13 @@ const TaskSchema = new mongoose.Schema({
   deadline: {
     type: String
   },
-  // 1: low, 2: middle, 3: high
   priority: {
+    // 1: low, 2: middle, 3: high
     type: Number,
     default: 1
   },
-  // 0: not started, 1: processing, 2: finished, 3: over
   status: {
+    // 0: not started, 1: processing, 2: finished
     type: Number,
     default: 0
   }

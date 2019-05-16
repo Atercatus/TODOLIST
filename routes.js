@@ -3,12 +3,14 @@ const HOME = "/";
 const NEW_LIST = "/newlist";
 const SHOW_LIST = "/showlist";
 
-// TODOLIST
+// TODOLIST (todolist id)
 const TODOLIST = "/todolist";
 const TODOLIST_DETAIL = "/:id";
 const ADD_TASK = "/:id/addtask";
+// TODOLIST - TASK (task id)
 const MODIFY_TASK = "/task/:id/patch";
 const DELETE_TASK = "/task/:id/delete";
+const MODIFT_TASK_STATUS = "/task/:id/patch-status";
 
 const routes = {
   home: HOME,
@@ -41,6 +43,13 @@ const routes = {
       return `/task/${taskId}/delete`;
     } else {
       return DELETE_TASK;
+    }
+  },
+  patchTaskStatus: taskId => {
+    if (taskId) {
+      return `/task/${taskId}/patch-status`;
+    } else {
+      return MODIFT_TASK_STATUS;
     }
   }
 };

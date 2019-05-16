@@ -46,8 +46,6 @@ export const getTodolist = async (req, res) => {
     // find by id
     const todolist = await Todolist.findById(id).populate("tasks");
 
-    console.log(todolist);
-
     res.render("todolistDetail.pug", {
       pageTitle: "TODOLIST DETAIL",
       todos: todolist,
@@ -66,14 +64,13 @@ export const patchTask = async (req, res) => {
   let {
     params: { id },
     body: {
-      task: { taskTitle, description, priority, startDate, deadline }
+      task: { taskTitle, description, priority, startDate, deadline, status }
     }
   } = req;
 
   try {
     if (
       taskTitle === "" ||
-      description === "" ||
       priority === "" ||
       startDate === "" ||
       deadline === ""
@@ -86,8 +83,11 @@ export const patchTask = async (req, res) => {
       description: description,
       priority: priority,
       startDate: startDate,
-      deadline: deadline
+      deadline: deadline,
+      status: status
     };
+
+    console.log(task);
 
     await Task.findByIdAndUpdate(id, task);
     task.id = id;
@@ -104,14 +104,13 @@ export const postNewTask = async (req, res) => {
   let {
     params: { id },
     body: {
-      task: { taskTitle, description, priority, startDate, deadline }
+      task: { taskTitle, description, priority, startDate, deadline, status }
     }
   } = req;
 
   try {
     if (
       taskTitle === "" ||
-      description === "" ||
       priority === "" ||
       startDate === "" ||
       deadline === ""
@@ -124,7 +123,8 @@ export const postNewTask = async (req, res) => {
       description: description,
       priority: priority,
       startDate: startDate,
-      deadline: deadline
+      deadline: deadline,
+      status: status
     };
 
     const newTask = await Task.create(task);
@@ -150,6 +150,30 @@ export const deleteTask = async (req, res) => {
     await Task.findByIdAndDelete(id);
     res.status(200).end();
   } catch (err) {
+    res.status(400).json({ message: err.message });
+    res.end();
+  }
+};
+
+export const patchTaskStatus = async (req, res) => {
+  try {
+    const {
+      params: { id },
+      body: { task }
+    } = req;
+
+    task.status = parseInt(task.status);
+    task.status = (task.status + 1) % 3;
+
+    await Task.findByIdAndUpdate(
+      { _id: id },
+      { $set: { status: task.status } }
+    );
+
+    res.write(JSON.stringify(task));
+    res.status(200).end();
+  } catch (err) {
+    console.log(err);
     res.status(400).json({ message: err.message });
     res.end();
   }

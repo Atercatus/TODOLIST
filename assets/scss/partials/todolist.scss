@@ -1,15 +1,17 @@
+@import "../config/variables.scss";
+
 $border-color: #2d2d2d;
 $text-color: #f2f3f3;
 $element-color: #ced1d1;
 $focus-border-color: #ea2027;
 
 .unpop {
-  animation: 0.5s fadeOut;
+  animation: 0.2s fadeOut;
   animation-fill-mode: forwards;
 }
 
 .popup {
-  animation: 0.5s fadeIn;
+  animation: 0.2s fadeIn;
   animation-fill-mode: forwards;
 }
 
@@ -17,10 +19,12 @@ $focus-border-color: #ea2027;
   0% {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
   }
   100% {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
 }
 
@@ -28,10 +32,12 @@ $focus-border-color: #ea2027;
   0% {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
   100% {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
   }
 }
 
@@ -83,7 +89,7 @@ $focus-border-color: #ea2027;
         border: 0;
         border-bottom: 2px solid $border-color;
         color: $text-color;
-        font-weight: 500px;
+        font-weight: 500;
         font-size: 20px;
         outline: none;
         background: transparent;
@@ -92,13 +98,22 @@ $focus-border-color: #ea2027;
         }
       }
 
-      span {
+      .statusIcon {
         user-select: none;
         color: white;
-        font-weight: 700px;
+        font-weight: 700;
         font-size: 40px;
         i {
           cursor: pointer;
+        }
+        .statusIcon-nonProgress {
+          color: $nonProgress-color;
+        }
+        .statusIcon-onProgress {
+          color: $onProgress-color;
+        }
+        .statusIcon-completed {
+          color: $completed-color;
         }
       }
     }
@@ -114,7 +129,7 @@ $focus-border-color: #ea2027;
         border-radius: 10px;
         border: 2px solid $border-color;
         font-size: 18px;
-        font-weight: 400px;
+        font-weight: 400;
         color: $text-color;
         background: transparent;
         width: 100%;
@@ -149,7 +164,7 @@ $focus-border-color: #ea2027;
 
       select {
         font-size: 18px;
-        font-weight: 200px;
+        font-weight: 200;
         appearance: none;
         width: 80px;
         text-align: center;
@@ -162,6 +177,11 @@ $focus-border-color: #ea2027;
         &:focus {
           border: 1px solid $focus-border-color;
         }
+      }
+
+      input[type="date"]::-webkit-inner-spin-button {
+        display: none;
+        -webkit-appearance: none;
       }
 
       input[type="date"] {

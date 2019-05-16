@@ -3,7 +3,7 @@ include mixins/listBlock
 
 block content
         .list-container
-            each list in todolists
+            each list in todolists.reverse()
                 +listBlock({
                     id: list.id,
                     title: list.listTitle

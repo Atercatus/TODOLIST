@@ -2,9 +2,9 @@ mixin todolistForm({})
     .todolist-container#jsPopup
         .todolist-form#jsFormTaskId
             .todolist__top
-                input(type="text", name="title", placeholder="Title", autocomplete="off", required=true).todolist__title#jsFormTitle
-                span.statusIcon
-                    i.far.fa-check-circle
+                input(type="text", name="title", placeholder="Title", autocomplete="off", required=true, maxlength="13").todolist__title#jsFormTitle
+                span(data-status).statusIcon#jsFormStatus
+                    i.far#jsFormStatusIcon
             .todolist__middle
                 textarea(name="description", placeholder="Description", required=true)#jsFormDescription
             .todolist__bottom

@@ -1,17 +1,31 @@
+@import "../config/variables.scss";
 $font-color: white;
 
+.task-container-nonProgress {
+  color: $nonProgress-color;
+}
+
+.task-container-onProgress {
+  color: $onProgress-color;
+}
+
+.task-container-completed {
+  color: $completed-color;
+
+  font-weight: 10;
+}
+
 .task-container {
+  position: relative;
   width: 100%;
   max-width: 600px;
   height: 30px;
   margin-top: 20px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid white;
 
   .task__id,
   .task__description {
-    opacity: 0;
     visibility: hidden;
     width: 0;
     height: 0;
@@ -21,31 +35,50 @@ $font-color: white;
     cursor: default;
   }
 
+  .task__caution {
+    width: 15px;
+    position: absolute;
+    left: -25px;
+    color: #d63031;
+  }
+
   .task__title {
     font-size: 18px;
     width: 200px;
-    color: $font-color;
     user-select: none;
+  }
+  .task__title-completed {
+    text-decoration: line-through;
+    font-style: italic;
+    font-size: 16px;
   }
 
   .task__priority {
+    width: 70px;
     border-radius: 3px;
-    border: 1px solid red;
     user-select: none;
+    color: white;
+    text-align: center;
+    padding: 2px 0;
+    opacity: 1;
   }
 
-  .task__startDate {
-    opacity: 0;
-    user-select: none;
+  .task__priority-low {
+    background-color: #57606f;
   }
 
-  .task__deadline {
-    opacity: 0;
-    user-select: none;
+  .task__priority-middle {
+    background-color: #5352ed;
   }
 
+  .task__priority-high {
+    background-color: #ff4757;
+  }
+
+  .task__startDate,
+  .task__deadline,
   .task__tilde {
-    opacity: 0;
+    opacity: 1;
     user-select: none;
   }
 
@@ -57,19 +90,32 @@ $font-color: white;
   i {
     margin-left: auto;
     margin-right: 15px;
-    opacity: 0;
-    color: white;
+    opacity: 1;
     cursor: pointer;
     user-select: none;
   }
   &:hover {
+    border-bottom: 2px solid white;
+
     i {
       opacity: 1;
     }
     .task__tilde,
     .task__startDate,
-    .task__deadline {
+    .task__deadline,
+    .task__priority {
       opacity: 1;
     }
   }
+}
+
+.task-container-low {
+  border-bottom: 1px solid $priority-low-color;
+}
+
+.task-container-middle {
+  border-bottom: 1px solid $priority-middle-color;
+}
+.task-container-high {
+  border-bottom: 1px solid $priority-high-color;
 }

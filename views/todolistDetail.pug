@@ -7,6 +7,13 @@ block content
         if errmsg
             .form__errmsg=errmsg
         button.popup-button#jsPopupBtn Add Task
+        .todolist__header
+            span.todolist__header__title Title
+            span.todolist__header__priority Priority
+            span.todolist__header__startDate Start
+            span.todolist__header__tilde 
+            span.todolist__header__deadline End
+            span.todolist__header__buttons
         +todolistForm({})
         if todos
             each task in todos.tasks
