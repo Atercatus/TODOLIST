@@ -57,7 +57,6 @@ const deleteList = async () => {
     method: "DELETE"
   })
     .then(response => {
-      console.log(response);
       window.location.replace(routes.home);
     })
     .catch(err => {
@@ -69,7 +68,6 @@ const deleteList = async () => {
 const modifyListTitle = async () => {
   const todolistId = window.location.href.split("/todolist/")[1];
 
-  console.log(listTitle.value);
   await axios({
     url: `/todolist${routes.modifyListTitle(todolistId)}`,
     method: "PATCH",
@@ -78,7 +76,6 @@ const modifyListTitle = async () => {
     }
   })
     .then(response => {
-      console.log(response);
       setListTitle(response.data);
     })
     .catch(err => {
@@ -96,11 +93,9 @@ const setListTitle = title => {
 ///////////////////////////////////////////////////
 const focusListTitle = () => {
   listTitle.readOnly = false;
-  console.log("focus");
 };
 const focusoutListTitle = () => {
   listTitle.readOnly = true;
-  console.log("focusout");
 };
 
 ///////////////////////////////////////////////////

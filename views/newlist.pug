@@ -5,5 +5,5 @@ block content
         if errmsg
             .form__errmsg=errmsg
         form(action=`${routes.newList}`, method="post")
-            input(type="text", name="title", placeholder="Title", required=true, maxlength="30",  autocomplete="off")
+            input(type="text", name="title", placeholder="Title", required=true, maxlength="30",  autocomplete="off", autofocus)
             input(type="submit", value="Add Now")

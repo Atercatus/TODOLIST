@@ -3,8 +3,10 @@ include mixins/listBlock
 
 block content
         .list-container
-            each list in todolists.reverse()
+            each list in todolists
                 +listBlock({
                     id: list.id,
-                    title: list.listTitle
+                    title: list.listTitle,
+                    remainders: list.remainingTask,
+                    cautions: list.cautions
                 })

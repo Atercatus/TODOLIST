@@ -17,13 +17,34 @@
     box-shadow: 3px 3px 5px 2px #2d3436;
   }
 
+  .listBlock__status {
+    display: flex;
+    flex-direction: column;
+
+    .listBlock__remainders,
+    .listBlock__cautions {
+      margin-left: 5px;
+      font-size: 18px;
+      padding: 5px 0px;
+    }
+
+    .listBlock__remainders {
+      color: #ffeaa7;
+    }
+    .listBlock__cautions {
+      color: #d63031;
+    }
+  }
+
   .listBlock__title {
     display: flex;
     justify-content: center;
     text-align: center;
     font-size: 20px;
     font-weight: 600;
-    color: white;
+    color: #dfe6e9;
     margin: 0px 30px;
+    max-width: 270px;
+    width: 100%;
   }
 }

@@ -5,6 +5,10 @@ const TodolistSchema = new mongoose.Schema({
     type: String,
     required: "Title is required"
   },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
   tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,

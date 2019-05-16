@@ -1,3 +1,6 @@
 mixin listBlock(todo = {})
     a.listBlock(href=routes.todolistDetail(todo.id))
+        .listBlock__status
+            .fas.fa-tasks.listBlock__remainders  #{todo.remainders}
+            .fas.fa-exclamation-triangle.listBlock__cautions  #{todo.cautions}
         .listBlock__title=todo.title
