@@ -118,8 +118,13 @@ $font-color: white;
   .task__startDate,
   .task__deadline,
   .task__tilde {
+    text-align: center;
     opacity: 1;
     user-select: none;
+  }
+  .task__startDate,
+  .task__deadline {
+    width: 75px;
   }
 
   .task__modifyBtn {

@@ -4,6 +4,7 @@ $border-color: #2d2d2d;
 $text-color: #f2f3f3;
 $element-color: #ced1d1;
 $focus-border-color: #ea2027;
+$form-hover-border-color: #dfe6e9;
 
 .unpop {
   animation: 0.2s fadeOut;
@@ -82,7 +83,7 @@ $focus-border-color: #ea2027;
       flex-direction: row;
       margin-bottom: 15px;
       width: 100%;
-      input {
+      .todolist__title {
         text-align: center;
         width: 100%;
         margin-right: 20px;
@@ -93,6 +94,9 @@ $focus-border-color: #ea2027;
         font-size: 20px;
         outline: none;
         background: transparent;
+        &:hover {
+          border-bottom: 1px solid $form-hover-border-color;
+        }
         &:focus {
           border-bottom: 1px solid $focus-border-color;
         }
@@ -147,6 +151,10 @@ $focus-border-color: #ea2027;
           background-color: #57606f;
         }
 
+        &:hover {
+          border: 1px solid $form-hover-border-color;
+        }
+
         &:focus {
           border: 1px solid $focus-border-color;
         }
@@ -163,7 +171,7 @@ $focus-border-color: #ea2027;
       margin-bottom: 20px;
 
       select {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 200;
         appearance: none;
         width: 80px;
@@ -174,9 +182,19 @@ $focus-border-color: #ea2027;
         border: 2px solid $border-color;
         cursor: pointer;
 
+        &:hover {
+          border: 1px solid $form-hover-border-color;
+        }
+
         &:focus {
           border: 1px solid $focus-border-color;
         }
+      }
+
+      .deadlineBtn {
+        color: #dfe6e9;
+        font-size: 18px;
+        cursor: pointer;
       }
 
       input[type="date"]::-webkit-inner-spin-button {
@@ -184,18 +202,34 @@ $focus-border-color: #ea2027;
         -webkit-appearance: none;
       }
 
-      input[type="date"] {
+      .startDate,
+      .deadline {
+        width: 125px;
         border-radius: 3px;
         color: $element-color;
         background-color: transparent;
         border: 2px solid $border-color;
         cursor: pointer;
 
+        &:hover {
+          border: 1px solid $form-hover-border-color;
+        }
+
         &:focus {
           border: 1px solid $focus-border-color;
         }
       }
+
+      .deadline-on {
+        pointer-events: auto;
+        opacity: 1;
+      }
+      .deadline-off {
+        opacity: 0;
+        pointer-events: none;
+      }
     }
+
     .todolist__buttons {
       user-select: none;
       display: flex;
@@ -212,6 +246,13 @@ $focus-border-color: #ea2027;
         font-size: 20px;
         color: $element-color;
         cursor: pointer;
+
+        &:hover {
+          border: 1px solid $form-hover-border-color;
+        }
+        &:focus {
+          border: 1px solid $focus-border-color;
+        }
 
         &:first-child {
           margin-left: 40px;

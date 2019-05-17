@@ -20,6 +20,7 @@ const taskBlockDescription = document.getElementById("jsFormDescription");
 const taskBlockPriority = document.getElementById("jsFormPriority");
 const taskBlockStartDate = document.getElementById("jsStartDate");
 const taskBlockDeadline = document.getElementById("jsDeadline");
+const taskBlockDeadlineBtn = document.getElementById("jsDeadlinBtn");
 const closeBtn = document.getElementById("jsCloseBtn");
 const submitBtn = document.getElementById("jsSubmitBtn");
 
@@ -79,8 +80,7 @@ const modifyListTitle = async () => {
       setListTitle(response.data);
     })
     .catch(err => {
-      console.log(err);
-      window.alert(err);
+      window.alert(err.response.data.message);
     });
 };
 
@@ -119,12 +119,14 @@ const popup = task => {
     const dateFormat = getDateFormat(date);
 
     taskBlockStartDate.value = dateFormat;
-    taskBlockDeadline.value = dateFormat;
+    taskBlockDeadline.value = "";
     taskBlockTitle.value = "";
     taskBlockDescription.value = "";
     taskBlockPriority.value = 1;
     taskBlockStatus.dataset.status = 0;
   }
+
+  console.log(taskBlockDeadline.value);
 
   setFormStatusStyle(taskBlockStatus);
   todoForm.classList.remove("unpop");
@@ -137,6 +139,28 @@ const unpop = () => {
   taskId.id = "";
 };
 
+const handleDeadlineBtn = event => {
+  if (event.target.dataset.toggle === "on") {
+    event.target.dataset.toggle = "off";
+    taskBlockDeadline.classList.remove("deadline-on");
+    taskBlockDeadline.classList.add("deadline-off");
+    event.target.classList.remove("fa-calendar-minus");
+    event.target.classList.add("fa-calendar-plus");
+    taskBlockDeadline.type = "text";
+    taskBlockDeadline.value = "";
+    taskBlockDeadline.readOnly = true;
+  } else {
+    event.target.dataset.toggle = "on";
+    taskBlockDeadline.classList.remove("deadline-off");
+    taskBlockDeadline.classList.add("deadline-on");
+    event.target.classList.remove("fa-calendar-plus");
+    event.target.classList.add("fa-calendar-minus");
+    taskBlockDeadline.type = "date";
+    taskBlockDeadline.readOnly = false;
+    taskBlockDeadline.value = getDateFormat(new Date());
+  }
+};
+
 // 경고 표시 스타일 변경
 const setCautionStyle = caution => {
   const parent = caution.parentNode;
@@ -146,7 +170,13 @@ const setCautionStyle = caution => {
   let s_date = new Date();
   s_date = s_date.toDateString();
   s_date = new Date(s_date);
-  const e_date = new Date(deadline.innerHTML);
+
+  let e_date = new Date(deadline.innerHTML);
+  if (deadline.innerHTML === "") {
+    e_date = new Date();
+  }
+  console.log(deadline.innerHTML);
+  console.log(e_date);
 
   if (getDateSubtract(s_date, e_date) < 0 && status.dataset.status !== "2") {
     caution.classList.add("fa-exclamation-triangle");
@@ -303,7 +333,6 @@ const handleModifyBtn = event => {
     if (
       taskBlockTitle.value === "" ||
       taskBlockStartDate.value === "" ||
-      taskBlockDeadline.value === "" ||
       taskBlockPriority.value === ""
     ) {
       throw Error("Please fill all of the options");
@@ -345,7 +374,6 @@ const handleSubmitBtn = event => {
     if (
       taskBlockTitle.value === "" ||
       taskBlockStartDate.value === "" ||
-      taskBlockDeadline.value === "" ||
       taskBlockPriority.value === ""
     ) {
       throw Error("Please fill all of the options");
@@ -655,6 +683,8 @@ const init = () => {
 
   listTitle.addEventListener("click", focusListTitle);
   listTitle.addEventListener("focusout", focusoutListTitle);
+
+  taskBlockDeadlineBtn.addEventListener("click", handleDeadlineBtn);
 
   setTasksStyle();
 };

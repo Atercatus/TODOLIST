@@ -12,8 +12,9 @@ mixin todolistForm({})
                     option(value="1") Low
                     option(value="2") Middle
                     option(value="3") High
-                input(type="date", name="startDate", required=true)#jsStartDate
-                input(type="date", name="deadline", required=true)#jsDeadline
+                input(type="date", name="startDate", required=true).startDate#jsStartDate
+                i(data-toggle="off").far.fa-calendar-plus.deadlineBtn#jsDeadlinBtn
+                input(type="date", name="deadline", required=true).deadline.deadline-off#jsDeadline
             .todolist__buttons
                 input(type="button", value="Submit")#jsSubmitBtn
                 input(type="button", value="Cancel")#jsCloseBtn

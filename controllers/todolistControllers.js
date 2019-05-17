@@ -84,6 +84,10 @@ export const modifyListTitle = async (req, res) => {
       body: { title }
     } = req;
 
+    if (title === "") {
+      throw Error("Please fill title");
+    }
+
     await Todolist.findByIdAndUpdate(id, { $set: { listTitle: title } });
     res.write(JSON.stringify(title));
     res.status(200).end();
@@ -104,12 +108,7 @@ export const patchTask = async (req, res) => {
   } = req;
 
   try {
-    if (
-      taskTitle === "" ||
-      priority === "" ||
-      startDate === "" ||
-      deadline === ""
-    ) {
+    if (taskTitle === "" || priority === "" || startDate === "") {
       throw Error("Please fill in all fields");
     }
 
@@ -142,12 +141,7 @@ export const postNewTask = async (req, res) => {
   } = req;
 
   try {
-    if (
-      taskTitle === "" ||
-      priority === "" ||
-      startDate === "" ||
-      deadline === ""
-    ) {
+    if (taskTitle === "" || priority === "" || startDate === "") {
       throw Error("Please fill in all fields");
     }
 
@@ -180,9 +174,17 @@ export const deleteTask = async (req, res) => {
       params: { id }
     } = req;
 
+    //
+    const list = await Todolist.findOneAndUpdate(
+      { tasks: id },
+      { $pull: { tasks: id } }
+    );
+    console.log(list.tasks);
+
     await Task.findByIdAndDelete(id);
     res.status(200).end();
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: err.message });
     res.end();
   }
