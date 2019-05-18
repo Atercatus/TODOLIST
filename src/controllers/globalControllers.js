@@ -47,8 +47,11 @@ export const showlist = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    req.flash("error", err.message);
-    res.render("showlist.pug", { pageTitle: "SHOW LIST", todolists: [] });
+    res.render("showlist.pug", {
+      pageTitle: "SHOW LIST",
+      todolists: [],
+      errmsg: err.message
+    });
   }
 };
 

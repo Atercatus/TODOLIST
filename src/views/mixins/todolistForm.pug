@@ -2,18 +2,25 @@ mixin todolistForm({})
     .todolist-container#jsPopup
         .todolist-form#jsFormTaskId
             .todolist__top
-                input(type="text", name="title", placeholder="Title", autocomplete="off", required=true, maxlength="25").todolist__title#jsFormTitle
-                span(data-status).statusIcon#jsFormStatus
-                    i.far#jsFormStatusIcon
+                input(type="text", name="title", placeholder="Title", autocomplete="off", required=true, maxlength="40").todolist__title#jsFormTitle
+                .todolist__top__status
+                    span(data-status).statusIcon#jsFormStatus
+                        i.far#jsFormStatusIcon
+                    span.statusText#jsStatusText
             .todolist__middle
                 textarea(name="description", placeholder="Description", required=true)#jsFormDescription
-            .todolist__bottom
+            .todolist__bottom__header
+                span.header__priority Priority
+                span.header__startDate Start
+                span.header__blank
+                span.header__deadline.header__deadline-off#jsDeadlinePH End
+            .todolist__bottom__row
                 select(name="priority", required=true)#jsFormPriority
                     option(value="1") Low
                     option(value="2") Middle
                     option(value="3") High
                 input(type="date", name="startDate", required=true).startDate#jsStartDate
-                i(data-toggle="off").far.fa-calendar-plus.deadlineBtn#jsDeadlinBtn
+                i(data-toggle="off").far.fa-calendar-plus.deadlineBtn#jsDeadlineBtn
                 input(type="date", name="deadline", required=true).deadline.deadline-off#jsDeadline
             .todolist__buttons
                 input(type="button", value="Submit")#jsSubmitBtn

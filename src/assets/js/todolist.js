@@ -15,12 +15,14 @@ const bell = document.getElementById("jsAlert");
 const taskId = document.getElementById("jsFormTaskId");
 const todoForm = document.getElementById("jsPopup");
 const taskBlockTitle = document.getElementById("jsFormTitle");
+const taskBlockStatusText = document.getElementById("jsStatusText");
 const taskBlockStatus = document.getElementById("jsFormStatus");
 const taskBlockDescription = document.getElementById("jsFormDescription");
 const taskBlockPriority = document.getElementById("jsFormPriority");
 const taskBlockStartDate = document.getElementById("jsStartDate");
 const taskBlockDeadline = document.getElementById("jsDeadline");
-const taskBlockDeadlineBtn = document.getElementById("jsDeadlinBtn");
+const taskBlockDeadlineBtn = document.getElementById("jsDeadlineBtn");
+const taskBlockDeadlinePlaceholder = document.getElementById("jsDeadlinePH");
 const closeBtn = document.getElementById("jsCloseBtn");
 const submitBtn = document.getElementById("jsSubmitBtn");
 
@@ -63,7 +65,7 @@ const deleteList = async () => {
       })
       .catch(err => {
         console.log(err);
-        window.alert(err);
+        window.alert(err.response.data.message);
       });
   }
 };
@@ -151,6 +153,8 @@ const dealineBtnOn = () => {
   taskBlockDeadline.classList.add("deadline-on");
   taskBlockDeadlineBtn.classList.remove("fa-calendar-plus");
   taskBlockDeadlineBtn.classList.add("fa-calendar-minus");
+  taskBlockDeadlinePlaceholder.classList.remove("header__deadline-off");
+  taskBlockDeadlinePlaceholder.classList.add("header__deadline-on");
   taskBlockDeadline.type = "date";
   taskBlockDeadline.readOnly = false;
   if (taskBlockDeadline.value === "") {
@@ -164,6 +168,9 @@ const deadlineBtnOff = () => {
   taskBlockDeadline.classList.add("deadline-off");
   taskBlockDeadlineBtn.classList.remove("fa-calendar-minus");
   taskBlockDeadlineBtn.classList.add("fa-calendar-plus");
+  taskBlockDeadlinePlaceholder.classList.remove("header__deadline-on");
+  taskBlockDeadlinePlaceholder.classList.add("header__deadline-off");
+
   taskBlockDeadline.type = "text";
   taskBlockDeadline.value = "";
   taskBlockDeadline.readOnly = true;
@@ -220,12 +227,15 @@ const setFormStatusStyle = formStatus => {
   if (status === "0") {
     icon.classList.add("fa-circle");
     icon.classList.add("statusIcon-nonProgress");
+    taskBlockStatusText.innerHTML = "Waiting";
   } else if (status === "1") {
     icon.classList.add("fa-play-circle");
     icon.classList.add("statusIcon-onProgress");
+    taskBlockStatusText.innerHTML = "In Progress";
   } else {
     icon.classList.add("fa-check-circle");
     icon.classList.add("statusIcon-completed");
+    taskBlockStatusText.innerHTML = "Completed";
   }
 };
 
@@ -257,7 +267,7 @@ const updateStatus = async task => {
     })
     .catch(err => {
       console.log(err);
-      window.alert(err);
+      window.alert(err.response.data.message);
     });
 };
 // 작업 상태 View에 반영
@@ -435,7 +445,7 @@ const patchTask = async task => {
     })
     .catch(err => {
       console.log(err);
-      window.alert(err);
+      window.alert(err.response.data.message);
     });
 };
 
@@ -476,7 +486,7 @@ const postNewTask = async task => {
     })
     .catch(err => {
       console.log(err);
-      window.alert(err);
+      window.alert(err.response.data.message);
     });
 };
 
@@ -615,7 +625,7 @@ const deleteTask = async id => {
     })
     .catch(err => {
       console.log(err);
-      window.alert(err);
+      window.alert(err.response.data.message);
     });
 };
 

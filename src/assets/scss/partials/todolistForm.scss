@@ -44,7 +44,7 @@ $form-hover-border-color: #dfe6e9;
 
 .todolist-container {
   width: $list-detail-width - 200px;
-  height: 300px;
+  height: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +86,6 @@ $form-hover-border-color: #dfe6e9;
       .todolist__title {
         text-align: center;
         width: 100%;
-        margin-right: 20px;
         border: 0;
         border-bottom: 2px solid $border-color;
         color: $text-color;
@@ -102,22 +101,37 @@ $form-hover-border-color: #dfe6e9;
         }
       }
 
-      .statusIcon {
-        user-select: none;
-        color: white;
-        font-weight: 700;
-        font-size: 40px;
-        i {
-          cursor: pointer;
+      .todolist__top__status {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        .statusText {
+          width: 60px;
+          user-select: none;
+          font-size: 8px;
+          margin-right: 2px;
+          color: #dfe6e9;
+          padding: 1px 0px;
         }
-        .statusIcon-nonProgress {
-          color: $nonProgress-color;
-        }
-        .statusIcon-onProgress {
-          color: $onProgress-color;
-        }
-        .statusIcon-completed {
-          color: $completed-color;
+        .statusIcon {
+          margin-left: 10px;
+          margin-right: 10px;
+          user-select: none;
+          color: white;
+          font-weight: 700;
+          font-size: 22px;
+          i {
+            cursor: pointer;
+          }
+          .statusIcon-nonProgress {
+            color: $nonProgress-color;
+          }
+          .statusIcon-onProgress {
+            color: $onProgress-color;
+          }
+          .statusIcon-completed {
+            color: $completed-color;
+          }
         }
       }
     }
@@ -139,6 +153,7 @@ $form-hover-border-color: #dfe6e9;
         width: 100%;
         height: 100px;
         resize: none;
+        padding: 2px 2px;
 
         &::-webkit-scrollbar {
           width: 12px;
@@ -160,7 +175,46 @@ $form-hover-border-color: #dfe6e9;
         }
       }
     }
-    .todolist__bottom {
+    .todolist__bottom__header {
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      flex-direction: row;
+      width: 100%;
+      color: #dfe6e9;
+      border-bottom: 2px;
+
+      .header__priority,
+      .header__blank,
+      .header__startDate,
+      .header__deadline {
+      }
+
+      .header__priority {
+        width: 80px;
+        background-color: transparent;
+        padding: 1px 2px;
+      }
+      .header__blank {
+        width: 15px;
+      }
+
+      .header__startDate,
+      .header__deadline {
+        padding: 1px 3px;
+
+        width: 125px;
+      }
+      .header__deadline-off {
+        opacity: 0;
+      }
+      .header__deadline-on {
+        opacity: 1;
+      }
+    }
+    .todolist__bottom__row {
       user-select: none;
       display: flex;
       justify-content: space-between;

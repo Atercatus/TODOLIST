@@ -41,8 +41,6 @@ export const getTodolist = async (req, res) => {
     params: { id }
   } = req;
   try {
-    // get id from params
-
     // find by id
     const list = await Todolist.findById(id);
     const todolist = await Todolist.findById(id).populate("tasks");
@@ -55,9 +53,10 @@ export const getTodolist = async (req, res) => {
     });
   } catch (err) {
     req.flash("error", err.message);
-    res.render("todolistDetail.png", {
-      id: id,
-      errmsg: req.flash("error")[0]
+    res.render("showlist.pug", {
+      errmsg: req.flash("error")[0],
+      pageTitle: "SHOW LIST",
+      todolists: []
     });
   }
 };
@@ -174,7 +173,6 @@ export const deleteTask = async (req, res) => {
       params: { id }
     } = req;
 
-    //
     const list = await Todolist.findOneAndUpdate(
       { tasks: id },
       { $pull: { tasks: id } }

@@ -2,12 +2,14 @@ extends layouts/main
 include mixins/listBlock
 
 block content
-        .list-container
-            if todolists
-                each list in todolists
-                    +listBlock({
-                        id: list.id,
-                        title: list.listTitle,
-                        remainders: list.remainingTask,
-                        cautions: list.cautions
-                    })
+    if errmsg
+        .form__errmsg=errmsg
+    .list-container
+        if todolists
+            each list in todolists
+                +listBlock({
+                    id: list.id,
+                    title: list.listTitle,
+                    remainders: list.remainingTask,
+                    cautions: list.cautions
+                })
