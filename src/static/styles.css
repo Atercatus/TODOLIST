@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Jua:400);@charset "UTF-8";
+@charset "UTF-8";
 html,
 body,
 div,
@@ -146,6 +146,10 @@ button {
 
 *:focus {
   outline: none; }
+
+@font-face {
+  font-family: "Jua regular", sans-serif;
+  src: url("https://fonts.googleapis.com/css?family=Jua:400"); }
 
 html,
 body {
@@ -1025,6 +1029,9 @@ footer {
             user-select: none; }
   .task-container .task__title-completed {
     text-decoration: line-through;
+    -webkit-text-decoration-line: line-through;
+            text-decoration-line: line-through;
+    -moz-text-decoration-line: line-through;
     font-style: italic;
     font-size: 16px; }
   .task-container .task__priority {

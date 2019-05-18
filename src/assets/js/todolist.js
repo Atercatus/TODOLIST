@@ -52,18 +52,20 @@ const getDateSubtract = (start, end) => {
 // TODOLIST CRUD
 ///////////////////////////////////////////////////
 const deleteList = async () => {
-  const todolistId = window.location.href.split("/todolist/")[1];
-  await axios({
-    url: `/todolist/${routes.deleteList(todolistId)}`,
-    method: "DELETE"
-  })
-    .then(response => {
-      window.location.replace(routes.home);
+  if (confirm("Are you sure you want to delete?")) {
+    const todolistId = window.location.href.split("/todolist/")[1];
+    await axios({
+      url: `/todolist/${routes.deleteList(todolistId)}`,
+      method: "DELETE"
     })
-    .catch(err => {
-      console.log(err);
-      window.alert(err);
-    });
+      .then(response => {
+        window.location.replace(routes.home);
+      })
+      .catch(err => {
+        console.log(err);
+        window.alert(err);
+      });
+  }
 };
 
 const modifyListTitle = async () => {

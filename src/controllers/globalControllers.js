@@ -18,7 +18,13 @@ export const showlist = async (req, res) => {
           tasknum++;
         }
 
-        let deadline = new Date(task.deadline);
+        let deadline;
+        if (task.deadline === "") {
+          deadline = new Date();
+        } else {
+          deadline = new Date(task.deadline);
+        }
+
         let today = new Date();
         today = today.toDateString();
         today = new Date(today);
