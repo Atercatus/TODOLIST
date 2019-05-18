@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 0.5 --ignore '.sass' --ignore 'static'",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
+    "start": "PRODUCTION=true node build/init.js",
+    "prestart": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +23,7 @@
     "@babel/preset-env": "^7.4.4",
     "autoprefixer": "^9.5.1",
     "axios": "^0.18.0",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.0.0-beta.6",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
@@ -38,6 +44,7 @@
     "webpack-cli": "^3.3.2"
   },
   "devDependencies": {
+    "@babel/node": "^7.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.0",
     "nodemon": "^1.19.0"

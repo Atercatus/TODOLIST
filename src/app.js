@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import flash from "connect-flash";
 import session from "express-session";
+import path from "path";
 
 import globalRouter from "./routers/globalRouter";
 import todolistRouter from "./routers/todolistRouter";
@@ -15,6 +16,7 @@ import { localToGlobals } from "./middlewares";
 const app = express();
 
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 // module
 app.use(helmet());
@@ -32,7 +34,7 @@ app.use(
 app.use(flash());
 app.use(localToGlobals);
 
-app.use("/static", express.static("static"));
+app.use("/static", express.static(path.join(__dirname, "static")));
 
 // router
 app.use(routes.home, globalRouter);

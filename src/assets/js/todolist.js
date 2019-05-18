@@ -126,8 +126,6 @@ const popup = task => {
     taskBlockStatus.dataset.status = 0;
   }
 
-  console.log(taskBlockDeadline.value);
-
   setFormStatusStyle(taskBlockStatus);
   todoForm.classList.remove("unpop");
   todoForm.classList.add("popup");
@@ -175,8 +173,6 @@ const setCautionStyle = caution => {
   if (deadline.innerHTML === "") {
     e_date = new Date();
   }
-  console.log(deadline.innerHTML);
-  console.log(e_date);
 
   if (getDateSubtract(s_date, e_date) < 0 && status.dataset.status !== "2") {
     caution.classList.add("fa-exclamation-triangle");

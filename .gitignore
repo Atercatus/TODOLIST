@@ -4,16 +4,7 @@
 yarn.lock
 .eslintrc.js
 
-# history
-/note
-*.hwp
-
-# static
-static
-
-# Video files
-/videos
-uploads
+build
 
 # Logs
 logs
