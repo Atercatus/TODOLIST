@@ -713,6 +713,7 @@ footer {
       width: 100%;
       margin-bottom: 20px; }
       .todolist-container .todolist-form .todolist__bottom select {
+        height: 24px;
         font-size: 16px;
         font-weight: 200;
         -webkit-appearance: none;
@@ -740,6 +741,7 @@ footer {
         -webkit-appearance: none; }
       .todolist-container .todolist-form .todolist__bottom .startDate,
       .todolist-container .todolist-form .todolist__bottom .deadline {
+        height: 24px;
         width: 125px;
         -webkit-border-radius: 3px;
            -moz-border-radius: 3px;

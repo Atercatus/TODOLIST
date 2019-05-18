@@ -171,6 +171,7 @@ $form-hover-border-color: #dfe6e9;
       margin-bottom: 20px;
 
       select {
+        height: 24px;
         font-size: 16px;
         font-weight: 200;
         appearance: none;
@@ -204,6 +205,7 @@ $form-hover-border-color: #dfe6e9;
 
       .startDate,
       .deadline {
+        height: 24px;
         width: 125px;
         border-radius: 3px;
         color: $element-color;
