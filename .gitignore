@@ -5,6 +5,7 @@ yarn.lock
 .eslintrc.js
 
 build
+*.txt
 
 # Logs
 logs
