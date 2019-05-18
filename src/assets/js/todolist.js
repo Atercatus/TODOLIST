@@ -126,6 +126,12 @@ const popup = task => {
     taskBlockStatus.dataset.status = 0;
   }
 
+  if (taskBlockDeadline.value === "") {
+    deadlineBtnOff();
+  } else {
+    dealineBtnOn();
+  }
+
   setFormStatusStyle(taskBlockStatus);
   todoForm.classList.remove("unpop");
   todoForm.classList.add("popup");
@@ -137,25 +143,35 @@ const unpop = () => {
   taskId.id = "";
 };
 
+const dealineBtnOn = () => {
+  taskBlockDeadlineBtn.dataset.toggle = "on";
+  taskBlockDeadline.classList.remove("deadline-off");
+  taskBlockDeadline.classList.add("deadline-on");
+  taskBlockDeadlineBtn.classList.remove("fa-calendar-plus");
+  taskBlockDeadlineBtn.classList.add("fa-calendar-minus");
+  taskBlockDeadline.type = "date";
+  taskBlockDeadline.readOnly = false;
+  if (taskBlockDeadline.value === "") {
+    taskBlockDeadline.value = getDateFormat(new Date());
+  }
+};
+
+const deadlineBtnOff = () => {
+  taskBlockDeadlineBtn.dataset.toggle = "off";
+  taskBlockDeadline.classList.remove("deadline-on");
+  taskBlockDeadline.classList.add("deadline-off");
+  taskBlockDeadlineBtn.classList.remove("fa-calendar-minus");
+  taskBlockDeadlineBtn.classList.add("fa-calendar-plus");
+  taskBlockDeadline.type = "text";
+  taskBlockDeadline.value = "";
+  taskBlockDeadline.readOnly = true;
+};
+
 const handleDeadlineBtn = event => {
   if (event.target.dataset.toggle === "on") {
-    event.target.dataset.toggle = "off";
-    taskBlockDeadline.classList.remove("deadline-on");
-    taskBlockDeadline.classList.add("deadline-off");
-    event.target.classList.remove("fa-calendar-minus");
-    event.target.classList.add("fa-calendar-plus");
-    taskBlockDeadline.type = "text";
-    taskBlockDeadline.value = "";
-    taskBlockDeadline.readOnly = true;
+    deadlineBtnOff();
   } else {
-    event.target.dataset.toggle = "on";
-    taskBlockDeadline.classList.remove("deadline-off");
-    taskBlockDeadline.classList.add("deadline-on");
-    event.target.classList.remove("fa-calendar-plus");
-    event.target.classList.add("fa-calendar-minus");
-    taskBlockDeadline.type = "date";
-    taskBlockDeadline.readOnly = false;
-    taskBlockDeadline.value = getDateFormat(new Date());
+    dealineBtnOn();
   }
 };
 
