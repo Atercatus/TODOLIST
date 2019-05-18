@@ -43,7 +43,7 @@ $form-hover-border-color: #dfe6e9;
 }
 
 .todolist-container {
-  width: $list-detail-width;
+  width: $list-detail-width - 200px;
   height: 300px;
   display: flex;
   flex-direction: column;

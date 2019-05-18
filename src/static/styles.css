@@ -521,7 +521,7 @@ footer {
     pointer-events: none; } }
 
 .todolist-container {
-  width: 650px;
+  width: 550px;
   height: 300px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -990,7 +990,7 @@ footer {
 .task-container {
   position: relative;
   width: 100%;
-  max-width: 650px;
+  max-width: 750px;
   height: 30px;
   margin-top: 20px;
   display: -webkit-box;
@@ -1018,7 +1018,7 @@ footer {
     color: #d63031; }
   .task-container .task__title {
     font-size: 18px;
-    width: 200px;
+    width: 330px;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
@@ -1136,7 +1136,7 @@ footer {
           align-items: center; }
   .container .todolist__options {
     position: relative;
-    width: 650px;
+    width: 750px;
     border: 1px solid #dfe6e9;
     display: -webkit-box;
     display: -webkit-flex;
@@ -1218,7 +1218,7 @@ footer {
     padding: 15px; }
   .container .todolist__header {
     width: 100%;
-    max-width: 650px;
+    max-width: 750px;
     height: 25px;
     display: -webkit-box;
     display: -webkit-flex;
@@ -1234,7 +1234,7 @@ footer {
             user-select: none;
     color: #dfe6e9; }
     .container .todolist__header .todolist__header__title {
-      width: 200px;
+      width: 330px;
       height: 100%; }
     .container .todolist__header .todolist__header__priority {
       text-align: center;
