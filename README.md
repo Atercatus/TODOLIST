@@ -32,14 +32,22 @@ npm run start
 ![image](https://user-images.githubusercontent.com/32104982/57986039-bd45ad80-7aaa-11e9-8083-da409240a5d9.png)
 **Main**
 </br>
+</br>
+</br>
 ![image](https://user-images.githubusercontent.com/32104982/57986056-e108f380-7aaa-11e9-85e5-ea082857a016.png)
 **Show List**
+</br>
+</br>
 </br>
 ![image](https://user-images.githubusercontent.com/32104982/57986066-f8e07780-7aaa-11e9-85c0-6d7e250f0d3e.png)
 **TODOLIST 상세**
 </br>
+</br>
+</br>
 ![image](https://user-images.githubusercontent.com/32104982/57986078-11e92880-7aab-11e9-802c-8e898fdad138.png)
 **NEW LIST**
+</br>
+</br>
 
 ![image](https://user-images.githubusercontent.com/32104982/57985688-a00ee000-7aa6-11e9-8855-3f64394d4051.png)</br>
 TODOLIST들을 보여줍니다. 
