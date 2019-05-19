@@ -17,7 +17,7 @@ npm install
 
 mongoURL, PORT 번호, cookie secret을 감추기 위해 .env 파일에다가 해당 변수들을 선언해두고 현재 git에 포함하지않았습니다.
 ~~~ 
-npm isntall dotenv 
+npm install dotenv 
 ~~~ 
 를 통해 설치하고 프로젝트의 최상단폴더에 .env로 선언해야합니다. 이는 process.env.변수를 찾을 수 있게 해줍니다.
 ~~~
