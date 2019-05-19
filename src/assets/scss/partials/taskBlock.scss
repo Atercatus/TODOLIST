@@ -64,6 +64,7 @@ $font-color: white;
   display: flex;
   align-items: center;
   padding: 0 0 2px 0;
+  order: 2;
 
   .task__id,
   .task__description {

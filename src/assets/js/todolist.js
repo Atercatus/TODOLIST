@@ -2,13 +2,16 @@ import axios from "axios";
 import routes from "../../routes";
 
 // todolist detail
+const container = document.getElementById("jsTodolistContainer");
+const listTitleContainer = document.getElementById("jsTitleContainer");
 const popupBtn = document.getElementById("jsPopupBtn");
 const listTitle = document.getElementById("jsListTitle");
-const listTitleSaveBtn = document.getElementById("jsListSave");
 const listDeleteBtn = document.getElementById("jsListDelete");
+const deleteCompletedTasksBtn = document.getElementById(
+  "jsDeleteCompletedTasksBtn"
+);
 
 // task block
-const container = document.getElementById("jsTaskContainer");
 const bell = document.getElementById("jsAlert");
 
 // todolist form
@@ -96,12 +99,31 @@ const setListTitle = title => {
 // TODOLIST DETAIL EVENT
 ///////////////////////////////////////////////////
 const focusListTitle = () => {
-  listTitle.readOnly = false;
+  listTitleContainer.classList.add("todolist__options-focus");
+  listTitleContainer.classList.remove("todolist__options-focusout");
 };
 const focusoutListTitle = () => {
-  listTitle.readOnly = true;
+  listTitleContainer.classList.add("todolist__options-focusout");
+  listTitleContainer.classList.remove("todolist__options-focus");
+  modifyListTitle();
 };
+const handleListTitleKeypress = e => {
+  if (e.keyCode === 13) {
+    console.log("here");
+    modifyListTitle();
+  }
+};
+const handleCompletedTasks = () => {
+  const tasks = document.querySelectorAll("#jsTaskContainer");
+  tasks.forEach(task => {
+    const id = task.querySelector(".task__id").id;
+    const status = task.querySelector("#jsTaskStatus").dataset.status;
 
+    if (status === "2") {
+      deleteTask(id);
+    }
+  });
+};
 ///////////////////////////////////////////////////
 // TODOLIST FORM EVENT
 ///////////////////////////////////////////////////
@@ -283,6 +305,7 @@ const setStatus = task => {
 const setStatusStyle = status => {
   const parent = status.parentNode;
   const caution = parent.querySelector("#jsTaskCaution");
+  const statusValue = status.dataset.status;
 
   // 기존 스타일 제거
   parent.classList.remove("task-container-nonProgress");
@@ -296,23 +319,24 @@ const setStatusStyle = status => {
   status.classList.remove("fa-play-circle");
   status.classList.remove("fa-check-circle");
 
-  const statusValue = status.dataset.status;
-  // 이 이후에 스타일 적용
   caution.classList.remove("fa-exclamation-triangle");
   setCautionStyle(caution);
 
   if (statusValue === "0") {
     parent.classList.add("task-container-nonProgress");
     status.classList.add("fa-circle");
+    parent.style.order = "2";
   } else if (statusValue === "1") {
     parent.classList.add("task-container-onProgress");
     status.classList.add("fa-play-circle");
+    parent.style.order = "2";
   } else if (statusValue === "2") {
     parent.classList.add("task-container-completed");
     parent.querySelector("#jsTaskTitle").classList.add("task__title-completed");
     parent
       .querySelector("#jsTaskCaution")
       .classList.remove("fa-exclamation-triangle");
+    parent.style.order = "1";
 
     status.classList.add("fa-check-circle");
   }
@@ -702,13 +726,15 @@ const init = () => {
     });
   });
 
-  listTitleSaveBtn.addEventListener("click", modifyListTitle);
   listDeleteBtn.addEventListener("click", deleteList);
 
-  listTitle.addEventListener("click", focusListTitle);
+  listTitle.addEventListener("focus", focusListTitle);
+  listTitle.addEventListener("keypress", handleListTitleKeypress);
   listTitle.addEventListener("focusout", focusoutListTitle);
 
   taskBlockDeadlineBtn.addEventListener("click", handleDeadlineBtn);
+
+  deleteCompletedTasksBtn.addEventListener("click", handleCompletedTasks);
 
   setTasksStyle();
 };

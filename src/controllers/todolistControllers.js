@@ -120,7 +120,6 @@ export const patchTask = async (req, res) => {
       status: status
     };
 
-    await Task.findByIdAndUpdate(id, task);
     task.id = id;
     res.write(JSON.stringify(task));
     res.status(200).end();
@@ -198,7 +197,7 @@ export const patchTaskStatus = async (req, res) => {
     task.status = parseInt(task.status);
     task.status = (task.status + 1) % 3;
 
-    await Task.findByIdAndUpdate(
+    const test = await Task.findByIdAndUpdate(
       { _id: id },
       { $set: { status: task.status } }
     );
