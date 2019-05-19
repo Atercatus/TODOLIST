@@ -7,6 +7,26 @@
 </br>
 </br>
 
+## 설치 및 빌드 방법
+mongoURL, PORT 번호, cookie secret을 감추기 위해 .env 파일에다가 해당 변수들을 선언해두고 현재 git에 포함하지않았습니다.
+~~~ 
+npm isntall dotenv 
+~~~ 
+를 통해 설치하고 프로젝트의 최상단폴더에 .env로 선언해야합니다. 이는 process.env.변수를 찾을 수 있게 해줍니다.
+</br>
+babel을 사용했는데 버전 문제로 인한 오류가 자주 발생하여서 https://github.com/babel/babel-upgrade 를 통해 babel을 업그레이드 한 것을 
+package.json에 확실하게 지정합니다.
+</br>
+package.json의 scripts 부분을 보시면 prebuild에 rm -rf build가 있습니다. 이는 처음 npm run start시에 에러를 유발합니다. build 파일은
+~~~
+npm run build:server
+~~~ 
+시에 생성됩니다. 이렇게 스크립트를 구성한 것은 재실행을 편하게 하기 위함으로 처음 build 파일이 존재하지 않는다면 따로 스크립트를 실행해야 합니다.
+~~~
+npm run build:server
+npm run start
+~~~
+순으로 실행하시면 중복하는 과정은 생기지만 오류는 발생하지않습니다.
 
 ## description
 ![image](https://user-images.githubusercontent.com/32104982/57986039-bd45ad80-7aaa-11e9-8083-da409240a5d9.png)
@@ -46,23 +66,4 @@ Add Task 또는 수정 버튼을 클릭 하였을 때 나오는 입력 폼입니
 제목, 내용, 상태, 우선순위, 시작날짜, 마감날짜를 입력할 수 있고 달력 아이콘을 누르면 마감기간을 사용할 지 안할 지 선택이 가능합니다.
 
 
-## 설치 및 빌드 방법
-mongoURL, PORT 번호, cookie secret을 감추기 위해 .env 파일에다가 해당 변수들을 선언해두고 현재 git에 포함하지않았습니다.
-~~~ 
-npm isntall dotenv 
-~~~ 
-를 통해 설치하고 프로젝트의 최상단폴더에 .env로 선언해야합니다. 이는 process.env.변수를 찾을 수 있게 해줍니다.
-</br>
-babel을 사용했는데 버전 문제로 인한 오류가 자주 발생하여서 https://github.com/babel/babel-upgrade 를 통해 babel을 업그레이드 한 것을 
-package.json에 확실하게 지정합니다.
-</br>
-package.json의 scripts 부분을 보시면 prebuild에 rm -rf build가 있습니다. 이는 처음 npm run start시에 에러를 유발합니다. build 파일은
-~~~
-npm run build:server
-~~~ 
-시에 생성됩니다. 이렇게 스크립트를 구성한 것은 재실행을 편하게 하기 위함으로 처음 build 파일이 존재하지 않는다면 따로 스크립트를 실행해야 합니다.
-~~~
-npm run build:server
-npm run start
-~~~
-순으로 실행하시면 중복하는 과정은 생기지만 오류는 발생하지않습니다.
+
