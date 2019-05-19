@@ -64,7 +64,7 @@ const deleteList = async () => {
       method: "DELETE"
     })
       .then(response => {
-        window.location.replace(routes.home);
+        window.location.replace(routes.showList);
       })
       .catch(err => {
         console.log(err);
@@ -711,7 +711,7 @@ const setTasksStyle = () => {
   });
 };
 
-const init = () => {
+const setEventhandlers = () => {
   const tasks = document.querySelectorAll("#jsTaskContainer");
   tasks.forEach(task => {
     task.addEventListener("animationend", handleAlertEnd);
@@ -727,15 +727,15 @@ const init = () => {
   });
 
   listDeleteBtn.addEventListener("click", deleteList);
-
   listTitle.addEventListener("focus", focusListTitle);
   listTitle.addEventListener("keypress", handleListTitleKeypress);
   listTitle.addEventListener("focusout", focusoutListTitle);
-
   taskBlockDeadlineBtn.addEventListener("click", handleDeadlineBtn);
-
   deleteCompletedTasksBtn.addEventListener("click", handleCompletedTasks);
+};
 
+const init = () => {
+  setEventhandlers();
   setTasksStyle();
 };
 

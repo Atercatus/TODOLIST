@@ -2,4 +2,10 @@ extends layouts/main
 include mixins/listBlock
 
 block content
-        | home
+        .home-container#jsHomeContainer
+                div(data-idx).img-slider__img#jsSlider
+                        img(src="/static/form.png").img-show#jsImage
+                        img(src="/static/list.png").img-none#jsImage
+                .slider__controls
+                        i.fas.fa-arrow-left#jsLeftArrow
+                        i.fas.fa-arrow-right#jsRightArrow
