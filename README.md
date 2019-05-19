@@ -4,6 +4,7 @@
 * mongodb(mongoatlas)
 * heroku(배포)
 * [현재 배포 중](https://rocky-depths-59329.herokuapp.com/)
+* chrome 에 최적화 되어있습니다. firefox 와 같은 브라우저에서는 폰트가 깨지는 등의 오류가 발생합니다.
 </br>
 </br>
 
