@@ -27,6 +27,9 @@ COOKIE_SECRET=<strings>
 ~~~
 </br>
 </br>
+
+**babel 오류가 발생했을 때**
+
 babel을 사용했는데 버전 문제로 인한 오류가 자주 발생하여서 https://github.com/babel/babel-upgrade 를 통해 babel을 업그레이드 한 것을 
 package.json에 확실하게 지정합니다.
 </br>
