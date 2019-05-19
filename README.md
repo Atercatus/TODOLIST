@@ -14,6 +14,12 @@ mongoURL, PORT 번호, cookie secret을 감추기 위해 .env 파일에다가 �
 npm isntall dotenv 
 ~~~ 
 를 통해 설치하고 프로젝트의 최상단폴더에 .env로 선언해야합니다. 이는 process.env.변수를 찾을 수 있게 해줍니다.
+~~~
+MONGO_URL="mongodb+srv://<your url>"
+PORT=<port num>
+COOKIE_SECRET=<strings>
+~~~
+</br>
 </br>
 babel을 사용했는데 버전 문제로 인한 오류가 자주 발생하여서 https://github.com/babel/babel-upgrade 를 통해 babel을 업그레이드 한 것을 
 package.json에 확실하게 지정합니다.
