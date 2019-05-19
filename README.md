@@ -9,6 +9,12 @@
 </br>
 
 ## 설치 및 빌드 방법
+기본적인 패키지들은 
+~~~
+npm install
+~~~
+로 설치가 가능합니다.
+
 mongoURL, PORT 번호, cookie secret을 감추기 위해 .env 파일에다가 해당 변수들을 선언해두고 현재 git에 포함하지않았습니다.
 ~~~ 
 npm isntall dotenv 
